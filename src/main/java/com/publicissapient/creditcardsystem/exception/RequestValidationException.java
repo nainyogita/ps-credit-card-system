@@ -1,6 +1,9 @@
 package com.publicissapient.creditcardsystem.exception;
 
-public class RequestValidationException extends RuntimeException{
+/**
+ * CustomException - RequestValidationException
+ */
+public class RequestValidationException extends RuntimeException {
 
     public RequestValidationException(String message) {
         super(message);

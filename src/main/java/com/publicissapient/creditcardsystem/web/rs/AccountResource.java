@@ -15,6 +15,9 @@ import javax.validation.Valid;
 import java.util.List;
 
 
+/**
+ * This is the Rest Controller implementation for Account Resource
+ */
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountResource {
@@ -28,9 +31,10 @@ public class AccountResource {
     }
 
     /**
-     * Get a list of all accounts stored
+     * This operation gets the list of all accounts
+     * REST Endpoint - GET /api/accounts
      *
-     * @return
+     * @return List<Account>
      */
     @GetMapping
     public ResponseEntity<List<Account>> getAllAccounts() {
@@ -40,8 +44,14 @@ public class AccountResource {
     }
 
     /**
-     * @param account
-     * @return
+     * This operation is used for account creation
+     * REST Endpoint - POST /api/accounts/create
+     *
+     * @param account of Type Account
+     *                :: one-to-one <-> Account Summary
+     *                :: many-to-one <- Customer
+     * @return ResponseEntity with Account and HTTP Status code
+     * @throws RequestValidationException
      */
     @PostMapping("/create")
     public ResponseEntity<Account> createAccount(@Valid @RequestBody Account account) throws RequestValidationException {

@@ -1,5 +1,8 @@
 package com.publicissapient.creditcardsystem.exception;
 
+/**
+ * Custom Exception - Entity Not Found Exception
+ */
 public class EntityNotFoundException extends RuntimeException {
 
     public EntityNotFoundException(String message) {

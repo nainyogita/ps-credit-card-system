@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import javax.validation.ConstraintViolationException;
 import java.time.ZonedDateTime;
 
+/**
+ * Global custom application Exception Handler
+ */
 @ControllerAdvice
 public class CustomExceptionHandler {
 

@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 
+/**
+ * AccountServiceImpl Service
+ * Contains method for saving and retrieving account details
+ */
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -22,6 +26,13 @@ public class AccountServiceImpl implements AccountService {
         this.accountSummaryRepo = accountSummaryRepo;
     }
 
+    /**
+     * This method creates account through Account Repository
+     *
+     * @param account of type Account
+     * @return Account
+     * @throws RequestValidationException
+     */
     @Override
     public Account createAccount(Account account) {
         account.getAccountSummary().setAccount(account);
@@ -32,6 +43,11 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+    /**
+     * This method retrieves all accounts through Account Repository
+     *
+     * @return Account
+     */
     @Override
     public List<Account> findAllAccounts() {
         return accountRepo.findAll();

@@ -5,6 +5,9 @@ import com.publicissapient.creditcardsystem.exception.EntityNotFoundException;
 
 import java.util.List;
 
+/**
+ * Interface for CustomerService
+ */
 public interface CustomerService {
 
     public Customer addCustomer(Customer customer);

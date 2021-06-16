@@ -7,6 +7,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+/**
+ * Entity class for Account Summary table
+ * <one-to-one> relationship with AccountSummary
+ * PK - FK of Account (account_id)
+ */
 @Entity
 @Table(name = "account_summary")
 public class AccountSummary implements Serializable {

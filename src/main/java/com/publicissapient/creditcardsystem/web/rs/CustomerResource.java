@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * This is the Rest Controller implementation for Account Resource
+ */
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerResource {
