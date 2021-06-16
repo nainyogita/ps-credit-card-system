@@ -21,7 +21,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, unique = true, updatable = false)
+    @Column(nullable = false, updatable = false)
     @Convert(converter = AttributeEncyptHelper.class)
     private String cardNumber;
 

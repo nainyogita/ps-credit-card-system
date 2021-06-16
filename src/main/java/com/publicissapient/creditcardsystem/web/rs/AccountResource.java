@@ -2,6 +2,7 @@ package com.publicissapient.creditcardsystem.web.rs;
 
 import com.publicissapient.creditcardsystem.domain.Account;
 import com.publicissapient.creditcardsystem.exception.RequestValidationException;
+import com.publicissapient.creditcardsystem.helper.ValidationHelper;
 import com.publicissapient.creditcardsystem.service.AccountService;
 
 import org.slf4j.Logger;
@@ -56,7 +57,12 @@ public class AccountResource {
     @PostMapping("/create")
     public ResponseEntity<Account> createAccount(@Valid @RequestBody Account account) throws RequestValidationException {
         logger.info("Request received -> Create Account");
-        Account newAccount = accountService.createAccount(account);
-        return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
+
+        if (ValidationHelper.LuhnChecker(account.getCardNumber())) {
+            Account newAccount = accountService.createAccount(account);
+            return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
+        }
+        throw new RequestValidationException("Luhn Check Failed for credit card Number");
+
     }
 }
