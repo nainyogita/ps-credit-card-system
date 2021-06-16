@@ -23,44 +23,45 @@ public class CustomExceptionHandler {
     /**
      * Custom exception handler for Bad Requests
      *
-     * @param e1 RequestValidationException
+     * @param e RequestValidationException
      * @return ResponseEntity with 400 BadRequest status
      */
     @ExceptionHandler(value = {RequestValidationException.class, ConstraintViolationException.class})
-    public ResponseEntity<Object> handleValidationException(RequestValidationException e1) {
-        logger.error("Exception Thrown :: \n Type-> " + e1.getClass().getName() + " \n Message -> " + e1.getMessage());
+    public ResponseEntity<Object> handleValidationException(RequestValidationException e) {
+        logger.error("Exception Thrown :: \n Type-> " + e.getClass().getName() + " \n Message -> " + e.getMessage());
         CustomException apiException = new CustomException(
-                e1.getMessage(), HttpStatus.BAD_REQUEST, ZonedDateTime.now());
+                e.getMessage(), HttpStatus.BAD_REQUEST, ZonedDateTime.now());
         return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
     }
 
     /**
      * Custom exception handler for Entity Not Found
      *
-     * @param e2 EntityNotFoundException
+     * @param e EntityNotFoundException
      * @return ResponseEntity with 404 NOT_FOUND status
      */
     @ExceptionHandler(value = {EntityNotFoundException.class})
-    public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException e2) {
-        logger.error("Exception Thrown :: \n Type -> " + e2.getClass().getName() + " \n Message -> " + e2.getMessage());
+    public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException e) {
+        logger.error("Exception Thrown :: \n Type -> " + e.getClass().getName() + " \n Message -> " + e.getMessage());
         CustomException apiException = new CustomException(
-                e2.getMessage(), HttpStatus.NOT_FOUND, ZonedDateTime.now());
+                e.getMessage(), HttpStatus.NOT_FOUND, ZonedDateTime.now());
         return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
     }
 
+
     /**
-     * Custom Default Exception handler
+     * Custom Exception handler for Illegal State Exception and other Exceptions
      *
-     * @param e Exception
+     * @param e IllegalStateException, Exception
      * @return Response Entity with 500 Internal Server Error
      */
-    @ExceptionHandler(value = {Exception.class})
-    public ResponseEntity<Object> handleDefaultException(Exception e) {
-        logger.error("Exception Thrown :: \n Type -> " + e.getClass().getName() + "\n Message -> " + e.getMessage());
-        //String errMessage = "Oops! Something went wrong.";
-        CustomException apiException = new CustomException(
-                e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, ZonedDateTime.now());
-        return new ResponseEntity<>(apiException, HttpStatus.INTERNAL_SERVER_ERROR);
-
-    }
+//    @ExceptionHandler(value = {IllegalStateException.class, Exception.class})
+//    public ResponseEntity<Object> handleDefaultException(Exception e) {
+//        logger.error("Exception Thrown :: \n Type -> " + e.getClass().getName() + "\n Message -> " + e.getMessage());
+//        //String errMessage = "Oops! Something went wrong.";
+//        CustomException apiException = new CustomException(
+//                e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, ZonedDateTime.now());
+//        return new ResponseEntity<>(apiException, HttpStatus.INTERNAL_SERVER_ERROR);
+//
+//    }
 }

@@ -1,6 +1,8 @@
 package com.publicissapient.creditcardsystem.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.publicissapient.creditcardsystem.helper.AttributeEncyptHelper;
+import org.hibernate.annotations.ColumnTransformer;
 
 import javax.persistence.*;
 
@@ -20,7 +22,8 @@ public class Account {
     private Long id;
 
     @Column(nullable = false, unique = true, updatable = false)
-    private Long cardNumber;
+    @Convert(converter = AttributeEncyptHelper.class)
+    private String cardNumber;
 
     @Column(columnDefinition = "boolean default false")
     private Boolean cardActive;
@@ -37,7 +40,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(Long id, Long cardNumber, Boolean active, Customer customer, AccountSummary summary) {
+    public Account(Long id, String cardNumber, Boolean active, Customer customer, AccountSummary summary) {
         this.id = id;
         this.cardNumber = cardNumber;
         this.cardActive = active;
@@ -53,14 +56,13 @@ public class Account {
         this.id = id;
     }
 
-    public Long getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(Long cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
-
 
     public Boolean getCardActive() {
         return cardActive;
@@ -69,7 +71,6 @@ public class Account {
     public void setCardActive(Boolean cardActive) {
         this.cardActive = cardActive;
     }
-
 
     public Customer getCustomer() {
         return customer;
