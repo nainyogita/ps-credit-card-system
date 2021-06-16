@@ -1,7 +1,7 @@
 package com.publicissapient.creditcardsystem.service;
 
 import com.publicissapient.creditcardsystem.domain.Customer;
-import com.publicissapient.creditcardsystem.exception.CustomerNotFoundException;
+import com.publicissapient.creditcardsystem.exception.EntityNotFoundException;
 import com.publicissapient.creditcardsystem.repo.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer findCustomerById(Long id) {
         return customerRepo.findCustomerById(id)
-                .orElseThrow(() -> new CustomerNotFoundException("Customer by id" + id + "was not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Customer by id -> " + id + " was not found"));
     }
 
     @Override

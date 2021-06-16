@@ -11,9 +11,12 @@ import java.util.Currency;
 @Table(name = "account_summary")
 public class AccountSummary implements Serializable {
 
-    private BigDecimal totalLimit;
-    private BigDecimal balance;
-    private Currency currency;
+    private BigDecimal totalLimit = BigDecimal.valueOf(0);
+
+    private BigDecimal balance = BigDecimal.valueOf(1500);
+
+    private String currency = Currency.getInstance("GBP").getSymbol();
+
     private String balanceType;
 
     @Id
@@ -26,7 +29,7 @@ public class AccountSummary implements Serializable {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    public AccountSummary(BigDecimal totalLimit, BigDecimal balance, Currency currency, String balanceType, Long id, Account account) {
+    public AccountSummary(BigDecimal totalLimit, BigDecimal balance, String currency, String balanceType, Long id, Account account) {
         this.totalLimit = totalLimit;
         this.balance = balance;
         this.currency = currency;
@@ -54,11 +57,11 @@ public class AccountSummary implements Serializable {
         this.balance = balance;
     }
 
-    public Currency getCurrency() {
+    public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Currency currency) {
+    public void setCurrency(String currency) {
         this.currency = currency;
     }
 

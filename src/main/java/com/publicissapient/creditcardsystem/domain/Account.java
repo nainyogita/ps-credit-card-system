@@ -3,6 +3,7 @@ package com.publicissapient.creditcardsystem.domain;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "account")
@@ -12,10 +13,11 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, unique = true, updatable = false)
     private Long cardNumber;
 
-    private Boolean active;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean cardActive;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
@@ -24,7 +26,7 @@ public class Account {
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     @JsonManagedReference
     @PrimaryKeyJoinColumn
-    private AccountSummary summary;
+    private AccountSummary accountSummary;
 
     public Account() {
     }
@@ -32,9 +34,9 @@ public class Account {
     public Account(Long id, Long cardNumber, Boolean active, Customer customer, AccountSummary summary) {
         this.id = id;
         this.cardNumber = cardNumber;
-        this.active = active;
+        this.cardActive = active;
         this.customer = customer;
-        this.summary = summary;
+        this.accountSummary = summary;
     }
 
     public Long getId() {
@@ -54,12 +56,12 @@ public class Account {
     }
 
 
-    public Boolean getActive() {
-        return active;
+    public Boolean getCardActive() {
+        return cardActive;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setCardActive(Boolean cardActive) {
+        this.cardActive = cardActive;
     }
 
 
@@ -71,12 +73,12 @@ public class Account {
         this.customer = customer;
     }
 
-    public AccountSummary getSummary() {
-        return summary;
+    public AccountSummary getAccountSummary() {
+        return accountSummary;
     }
 
-    public void setSummary(AccountSummary summary) {
-        this.summary = summary;
+    public void setAccountSummary(AccountSummary accountSummary) {
+        this.accountSummary = accountSummary;
     }
 
 

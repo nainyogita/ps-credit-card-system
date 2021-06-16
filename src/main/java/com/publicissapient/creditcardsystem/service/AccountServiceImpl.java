@@ -1,11 +1,13 @@
 package com.publicissapient.creditcardsystem.service;
 
 import com.publicissapient.creditcardsystem.domain.Account;
+import com.publicissapient.creditcardsystem.exception.RequestValidationException;
 import com.publicissapient.creditcardsystem.repo.AccountRepo;
 import com.publicissapient.creditcardsystem.repo.AccountSummaryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 @Service
@@ -21,9 +23,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account addAccount(Account account) {
-        account.getSummary().setAccount(account);
-        return accountRepo.save(account);
+    public Account createAccount(Account account) {
+        account.getAccountSummary().setAccount(account);
+        try {
+            return accountRepo.save(account);
+        } catch (ConstraintViolationException e) {
+            throw new RequestValidationException("Request Validation Exception - Constraint Violated");
+        }
     }
 
     @Override
