@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ValidationHelper {
 
-    public static boolean LuhnChecker(String cardNumber) {
+    public static boolean checkLuhnSum(String cardNumber) {
 
         Boolean result = false;
         Boolean isSecond = false; //Denotes if cursor is at alternate/second position

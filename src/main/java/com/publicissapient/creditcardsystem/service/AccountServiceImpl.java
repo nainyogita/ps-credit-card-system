@@ -1,15 +1,12 @@
 package com.publicissapient.creditcardsystem.service;
 
 import com.publicissapient.creditcardsystem.domain.Account;
-import com.publicissapient.creditcardsystem.exception.ContractErrorCodes;
 import com.publicissapient.creditcardsystem.exception.CardValidationException;
 import com.publicissapient.creditcardsystem.repo.AccountRepo;
 import com.publicissapient.creditcardsystem.repo.AccountSummaryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 import java.util.List;
 
 /**

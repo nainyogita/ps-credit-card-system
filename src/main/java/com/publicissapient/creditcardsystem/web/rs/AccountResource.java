@@ -1,5 +1,6 @@
 package com.publicissapient.creditcardsystem.web.rs;
 
+import com.publicissapient.creditcardsystem.Constants;
 import com.publicissapient.creditcardsystem.domain.Account;
 import com.publicissapient.creditcardsystem.exception.CardValidationException;
 import com.publicissapient.creditcardsystem.helper.ValidationHelper;
@@ -24,6 +25,7 @@ import java.util.List;
 public class AccountResource {
 
     Logger logger = LoggerFactory.getLogger(AccountResource.class);
+
     private final AccountService accountService;
 
     @Autowired
@@ -52,13 +54,17 @@ public class AccountResource {
      *                :: one-to-one <-> Account Summary
      *                :: many-to-one <- Customer
      * @return ResponseEntity with Account and HTTP Status code
-     * @throws CardValidationException
+     * @throws throws cardValidationException
      */
     @PostMapping("/create")
-    public ResponseEntity<Account> createAccount(@Valid @RequestBody Account account) throws CardValidationException {
+    public ResponseEntity<Account> createAccount(@Valid @RequestBody Account account)
+            throws CardValidationException {
+
         logger.info("Request received -> Create Account");
 
-        if (ValidationHelper.LuhnChecker(account.getCardNumber())) {
+        if (null != account.getCardNumber()
+                && account.getCardNumber().length() <= Constants.CARD_MAX_LENGTH
+                && ValidationHelper.checkLuhnSum(account.getCardNumber())) {
             Account newAccount = accountService.createAccount(account);
             return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
         }

@@ -1,6 +1,7 @@
 package com.publicissapient.creditcardsystem.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.publicissapient.creditcardsystem.Constants;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,11 +17,11 @@ import java.util.Currency;
 @Table(name = "account_summary")
 public class AccountSummary implements Serializable {
 
-    private BigDecimal totalLimit = BigDecimal.valueOf(0);
+    private BigDecimal totalLimit = Constants.TOTAL_LIMIT;
 
-    private BigDecimal balance = BigDecimal.valueOf(1500);
+    private BigDecimal balance = Constants.BALANCE_AMOUNT;
 
-    private String currency = Currency.getInstance("GBP").getSymbol();
+    private String currency = Currency.getInstance(Constants.DEFAULT_LOCALE).getSymbol();
 
     private String balanceType;
 
