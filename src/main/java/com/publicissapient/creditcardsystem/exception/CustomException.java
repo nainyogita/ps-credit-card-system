@@ -10,13 +10,15 @@ import java.time.ZonedDateTime;
  */
 public class CustomException {
 
-    private final String message;
+    private final String errorCode;
+    private final String description;
     private final HttpStatus httpStatus;
     private final ZonedDateTime timeStamp;
 
 
-    public CustomException(String message, HttpStatus httpStatus, ZonedDateTime zonedTimeStamp) {
-        this.message = message;
+    public CustomException(String errorCode, String description, HttpStatus httpStatus, ZonedDateTime zonedTimeStamp) {
+        this.errorCode = errorCode;
+        this.description = description;
         this.httpStatus = httpStatus;
         this.timeStamp = zonedTimeStamp;
     }
@@ -24,8 +26,12 @@ public class CustomException {
     /**
      * Getters and Setters
      */
-    public String getMessage() {
-        return message;
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public HttpStatus getHttpStatus() {

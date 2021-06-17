@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer findCustomerById(Long id) {
         return customerRepo.findCustomerById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Customer by id -> " + id + " was not found"));
+                .orElseThrow(() -> new EntityNotFoundException());
     }
 
     @Override
